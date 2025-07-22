@@ -1,0 +1,25 @@
+{
+  "name": "kai",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "dev:android": "pnpm -r android",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "db:generate": "cd apps/native && drizzle-kit generate"
+  },
+  "dependencies": {
+    "expo": "~53.0.20",
+    "react": "19.0.0",
+    "react-native": "0.79.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.0"
+  },
+  "packageManager": "pnpm@9.7.0",
+  "version": "1.0.0"
+}
