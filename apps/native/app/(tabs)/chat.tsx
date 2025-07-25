@@ -30,6 +30,7 @@ export default function ChatPage() {
   const [modelStatusData, setModelStatusData] = useState(
     llamaService.getModelStatusSync()
   );
+  const [provider, setProvider] = useState(modelStatusData.provider || "local");
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
@@ -61,11 +62,16 @@ export default function ChatPage() {
   }, []);
 
   useEffect(() => {
+    setProvider(modelStatusData.provider || "local");
+  }, [modelStatusData]);
+
+  useEffect(() => {
     const loadModelFromStatus = async () => {
       if (
         modelStatusData?.isLoaded &&
         modelStatusData.modelPath &&
-        !llamaService.getLlamaContext()
+        !llamaService.getLlamaContext() &&
+        modelStatusData.provider === "local"
       ) {
         setLoadingModel(true);
         try {
@@ -135,53 +141,9 @@ export default function ChatPage() {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      {!modelStatusLoaded ? (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <ActivityIndicator size="large" color="#2563eb" />
-        </View>
-      ) : !modelStatusData?.isLoaded ? (
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 16,
-          }}
-        >
-          <Text style={{ color: "#f87171", textAlign: "center", margin: 8 }}>
-            No model loaded. Please load a model in the Profile tab.
-          </Text>
-          <TouchableOpacity
-            onPress={checkModelStatus}
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 6,
-              borderRadius: 6,
-              backgroundColor: "#222",
-            }}
-            disabled={refreshing}
-            accessibilityLabel="Refresh model status"
-          >
-            <Ionicons name="refresh" size={20} color="#2563eb" />
-            <Text
-              style={{ color: "#2563eb", marginLeft: 4, fontWeight: "bold" }}
-            >
-              Refresh
-            </Text>
-            {refreshing && (
-              <ActivityIndicator
-                size="small"
-                color="#2563eb"
-                style={{ marginLeft: 8 }}
-              />
-            )}
-          </TouchableOpacity>
-        </View>
-      ) : !llamaService.getLlamaContext() ? (
+    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+      {/* Removed provider/model display */}
+      {provider === "local" && !llamaService.getLlamaContext() ? (
         <View
           style={{
             flex: 1,

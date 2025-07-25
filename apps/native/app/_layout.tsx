@@ -42,11 +42,15 @@ export default function RootLayout() {
 
   React.useEffect(() => {
     (async () => {
-      const status = await llamaService.checkModelStatus();
-      if (status.isLoaded && status.modelPath) {
-        try {
+      try {
+        const status = await llamaService.checkModelStatus();
+        if (status.isLoaded && status.modelPath) {
+          console.log("Loading model", status);
+
           await llamaService.loadModel();
-        } catch (e) {}
+        }
+      } catch (error) {
+        console.log(error);
       }
     })();
   }, []);

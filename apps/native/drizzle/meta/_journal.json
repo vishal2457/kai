@@ -15,6 +15,13 @@
       "when": 1753197351815,
       "tag": "0001_graceful_bishop",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1753261982121,
+      "tag": "0002_big_power_man",
+      "breakpoints": true
     }
   ]
 }

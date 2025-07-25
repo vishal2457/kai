@@ -16,6 +16,7 @@
     "@react-navigation/native": "^7.0.14",
     "@tanstack/react-form": "^1.0.5",
     "@tanstack/react-query": "^5.80.5",
+    "axios": "^1.11.0",
     "babel-plugin-inline-import": "^3.0.0",
     "cactus-react-native": "latest",
     "date-fns": "^4.1.0",
